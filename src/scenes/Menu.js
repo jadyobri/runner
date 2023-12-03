@@ -17,11 +17,13 @@ class Menu extends Phaser.Scene {
            }
            this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Bounce Quest', menuConfig).setOrigin(0.5);
            this.add.text(game.config.width/2, game.config.height/2, '(F) to bounce and hold it to go higher.', menuConfig).setOrigin(0.5);
+           
            menuConfig.backgroundColor = '#00FF00';
            menuConfig.color = '#000';
            this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Go until you fall, see how high your score can be', menuConfig).setOrigin(0.5);
            this.add.text(game.config.width/2, game.config.height/2 + borderUISize*2 + borderPadding*2, 'Press R when you fall off to reset', menuConfig).setOrigin(0.5);
            this.add.text(game.config.width/2, game.config.height/2 + borderUISize*3 + borderPadding*3, 'Press C for credits', menuConfig).setOrigin(0.5);
+           this.add.text(game.config.width/2, game.config.height/2+ borderUISize*4 + borderPadding*4, '(Enter) to start.', menuConfig).setOrigin(0.5);
            keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
            keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
     }

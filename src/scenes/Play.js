@@ -50,10 +50,11 @@ class Play extends Phaser.Scene{
     }
     create(){
         this.mate = this.sound.add('theme');
-        //this.mate.play();
-        //this.mate.setLoop(true);
         this.mate.play();
-        this.gameOver = false;
+        //this.mate.setLoop(true);
+        //this.mate.play();
+        //this.gameOver = false;
+        //console.log(this.gameOver);
         //const array = [[1,1,1],[1,1,1],[1,1,1]];
         //const mapped = this.make.tilemap({ data:array, tileWidth: 32, tileHeight:32});
         //mapped.addTilesetImage('tiles');
@@ -101,20 +102,24 @@ class Play extends Phaser.Scene{
         this.timeElapsed = 0;
         this.bounce = this.physics.add.sprite(width/4, height/4, 'ball', 1).setScale(3);
         this.timecount = 0;
-        this.time.addEvent({delay: 1000, callback: ()=>{
-        while(this.gameOver != true){
-            this.timer++;
-            if(this.timer > 40 && this.timecount == 0){
+    //     while(this.gameOver!=true){
+    //     this.time.addEvent({delay: 1000, callback: ()=>{
+    //      //while(this.gameOver != true){
+    //         this.timer++;
+    //         if(this.timer > 40 && this.timecount == 0){
                 
-                this.timecount++;
-                this.SCROLL_SPEED += 200;
+    //             this.timecount++;
+    //             this.SCROLL_SPEED += 200;
+                
             
-            }
-        }
-            // if(this.timeElapsed == 30){
-            //     game.settings.spaceshipSpeed++;
-            //    // console.log('here');
-             }, loop: true});
+    //         }
+    //         this.timeless.text = this.timer;
+    //    // }
+    //     //     // if(this.timeElapsed == 30){
+    //     //     //     game.settings.spaceshipSpeed++;
+    //     //     //    // console.log('here');
+    //           }, loop: true});
+    //         }
         //this.bounce.setVelocity(0,60);
         
         this.bounce.setOrigin(0.5,0);
@@ -163,8 +168,8 @@ class Play extends Phaser.Scene{
        //this.platformGroup.body.setCollideWorldBounds(true);
        this.physics.add.collider(this.bounce,this.platformGroup);
 
-       this.physics.add.collider(this.bounce, this.nubeyGroup);
-       this.gonethrough = 0;
+      // this.physics.add.collider(this.bounce, this.nubeyGroup);
+       //this.gonethrough = 0;
        this.addPlatforms(game.config.width, game.config.width/4, game.config.height * gameOptions.platformVerticalLimit[1]);
 
        
@@ -199,7 +204,9 @@ class Play extends Phaser.Scene{
     // }
     addPlatforms(platformWidth, posX, posY){
 
-            this.timeless.text = this.timer;
+
+
+        //this.timeless.text = this.timer;
         // else{
         //     this.time.loop = false;
         // }
@@ -212,7 +219,7 @@ class Play extends Phaser.Scene{
         //let nubey;
         if(this.platformPool.getLength()){
             
-            console.log('here');
+            //console.log('here');
             platform = this.platformPool.getFirst();
             // nubey = this.physics.add.sprite(posX,posY,'platform');
             // nubey.setVelocityX(-this.SCROLL_SPEED);
@@ -347,7 +354,26 @@ class Play extends Phaser.Scene{
     //     this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0],gameOptions.spawnRange[1]);
     //    }
     update(){
+        if(this.gameOver!=true){
+            this.time.addEvent({delay: 1000, callback: ()=>{
+             //while(this.gameOver != true){
+                this.timer++;
+                if(this.timer > 40 && this.timecount == 0){
+                    
+                    this.timecount++;
+                    this.SCROLL_SPEED += 200;
+                    
+                
+                }
+                this.timeless.text = this.timer;
+           // }
+            //     // if(this.timeElapsed == 30){
+            //     //     game.settings.spaceshipSpeed++;
+            //     //    // console.log('here');
+                  }, loop: false});
+                }
         //console.log(this.bounce.y);
+        //this.time.text = this.timer;
         this.bounce.x = game.config.width/4;
         if(this.bounce.y > 640 && this.gameOver != true){
             this.sound.play('death');
@@ -383,7 +409,7 @@ class Play extends Phaser.Scene{
         }
 
         if(platform.x < -platform.displayWidth/2){
-            console.log("taken out");
+           // console.log("taken out");
             this.platformGroup.killAndHide(platform);
             //console.log("deleted");
             this.platformGroup.remove(platform);
@@ -426,7 +452,7 @@ class Play extends Phaser.Scene{
             //console.log(this.factor);
             //this.
             this.bounce.setVelocity(0,1000);
-            this.bounce.setMaxVelocity(0, 1000);
+            
             this.sound.play('waterdrop');
         }
         //console.log(downFlag);
@@ -435,7 +461,7 @@ class Play extends Phaser.Scene{
             //console.log("here");
             //this.bounce.setBounceY(2);
            // downFlag = true;
-
+           this.bounce.setMaxVelocity(0, 1000);
            //this.bounce.setMaxVelocity(0,1000);
            //this.physics.world.gravity.y = 3000;
            //this.bounce.setVelocity(0,this.bounce.body.velocity.y*1.5);
